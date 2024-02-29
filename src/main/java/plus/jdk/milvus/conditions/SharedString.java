@@ -34,8 +34,6 @@ public class SharedString implements Serializable {
 
     /**
      * 置 empty
-     *
-     * @since 3.3.1
      */
     public void toEmpty() {
         stringValue = StringPool.EMPTY;
@@ -43,8 +41,6 @@ public class SharedString implements Serializable {
 
     /**
      * 置 null
-     *
-     * @since 3.3.1
      */
     public void toNull() {
         stringValue = null;

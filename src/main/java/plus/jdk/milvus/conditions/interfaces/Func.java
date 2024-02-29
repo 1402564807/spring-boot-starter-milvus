@@ -164,7 +164,6 @@ public interface Func<Children, R> extends Serializable {
      * @param condition 执行条件
      * @param consumer  消费函数
      * @return children
-     * @since 3.3.1
      */
     Children func(boolean condition, Consumer<Children> consumer);
 

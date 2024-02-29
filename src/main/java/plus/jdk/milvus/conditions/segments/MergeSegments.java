@@ -39,8 +39,6 @@ public class MergeSegments implements IExprSegment {
 
     /**
      * 清理
-     *
-     * @since 3.3.1
      */
     public void clear() {
         exprSegment = StringPool.EMPTY;

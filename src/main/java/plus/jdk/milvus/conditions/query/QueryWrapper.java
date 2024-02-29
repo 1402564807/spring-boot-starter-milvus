@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import plus.jdk.milvus.conditions.AbstractWrapper;
-import plus.jdk.milvus.conditions.SharedString;
 import plus.jdk.milvus.conditions.segments.MergeSegments;
 import plus.jdk.milvus.record.VectorModel;
 import plus.jdk.milvus.wrapper.LambdaQueryWrapper;
@@ -17,10 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class QueryWrapper<T extends VectorModel<? extends VectorModel<?>>> extends AbstractWrapper<T, String, QueryWrapper<T>>
         implements Query<QueryWrapper<T>, T, String> {
 
-    /**
-     * 查询字段
-     */
-    protected final SharedString exprSelect = new SharedString();
     @Getter
     @Setter
     @Accessors(chain = true)
@@ -56,18 +51,13 @@ public class QueryWrapper<T extends VectorModel<? extends VectorModel<?>>> exten
         this.expression = mergeSegments;
     }
 
-    @Override
-    public String getExprSelect() {
-        return exprSelect.getStringValue();
-    }
-
     /**
      * 返回一个支持 lambda 函数写法的 wrapper
      *
      * @return LambdaQueryWrapper
      */
     public LambdaQueryWrapper<T> lambda() {
-        return new LambdaQueryWrapper<>(getEntity(), getEntityClass(), exprSelect, paramNameSeq, expression, offset, limit);
+        return new LambdaQueryWrapper<>(getEntity(), getEntityClass(), paramNameSeq, expression, offset, limit);
     }
 
     /**
@@ -84,6 +74,5 @@ public class QueryWrapper<T extends VectorModel<? extends VectorModel<?>>> exten
     @Override
     public void clear() {
         super.clear();
-        exprSelect.toNull();
     }
 }

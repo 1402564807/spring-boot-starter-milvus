@@ -17,7 +17,6 @@ import plus.jdk.milvus.enums.ExprKeyword;
 import plus.jdk.milvus.enums.ExprLike;
 import plus.jdk.milvus.record.VectorModel;
 import plus.jdk.milvus.toolkit.CollectionUtils;
-import plus.jdk.milvus.toolkit.Constants;
 import plus.jdk.milvus.toolkit.StringUtils;
 import plus.jdk.milvus.toolkit.expr.ExprUtils;
 

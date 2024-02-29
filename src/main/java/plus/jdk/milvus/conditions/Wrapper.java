@@ -63,7 +63,6 @@ public abstract class Wrapper<T extends VectorModel<? extends VectorModel<?>>> i
      * 获取格式化后的执行Expr
      *
      * @return Expr
-     * @since 3.3.1
      */
     public String getTargetExpr() {
         return getExprSegment().replaceAll("#\\{.+?}", "?");
@@ -71,8 +70,6 @@ public abstract class Wrapper<T extends VectorModel<? extends VectorModel<?>>> i
 
     /**
      * 条件清空
-     *
-     * @since 3.3.1
      */
     abstract public void clear();
 }

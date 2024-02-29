@@ -333,7 +333,6 @@ public final class StringUtils {
      * @return <code>true</code> if the String ends with the suffix, case
      * sensitive, or both <code>null</code>
      * @see String#endsWith(String)
-     * @since 2.4
      */
     public static boolean endsWith(String str, String suffix) {
         return endsWith(str, suffix, false);

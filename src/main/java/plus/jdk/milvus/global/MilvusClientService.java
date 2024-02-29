@@ -87,7 +87,7 @@ public class MilvusClientService {
 
     public <T extends VectorModel<?>> boolean batchRemove(LambdaQueryWrapper<T> wrapper) throws MilvusException {
         CollectionDefinition collection = CollectionHelper.getCollectionInfo(wrapper.getEntityClass());
-        String expression = wrapper.getExprSelect();
+        String expression = wrapper.getTargetExpr();
         return remove(collection, expression);
     }
 
@@ -363,7 +363,7 @@ public class MilvusClientService {
         if (wrapper.getOffset() != null) {
             builder.withOffset(wrapper.getOffset());
         }
-        String expression = wrapper.getExprSelect();
+        String expression = wrapper.getTargetExpr();
         if (!StringUtils.isEmpty(expression)) {
             builder.withExpr(expression);
         }

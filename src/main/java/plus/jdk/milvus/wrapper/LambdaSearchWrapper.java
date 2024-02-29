@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import plus.jdk.milvus.conditions.AbstractLambdaWrapper;
-import plus.jdk.milvus.conditions.SharedString;
 import plus.jdk.milvus.conditions.search.Search;
 import plus.jdk.milvus.conditions.segments.MergeSegments;
 import plus.jdk.milvus.model.IIndexExtra;
@@ -18,6 +17,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Lambda 更新封装
  */
+@Setter
+@Getter
 public class LambdaSearchWrapper<T extends VectorModel<? extends VectorModel<?>>> extends AbstractLambdaWrapper<T, LambdaSearchWrapper<T>>
         implements Search<LambdaSearchWrapper<T>, T, SFunction<T, ?>>, Serializable {
 
@@ -28,8 +29,6 @@ public class LambdaSearchWrapper<T extends VectorModel<? extends VectorModel<?>>
      * Search parameter(s) specific to the index.
      * See <a href="https://milvus.io/docs/index.md">Vector Index</a> for more information.
      */
-    @Getter
-    @Setter
     @Accessors(chain = true)
     private IIndexExtra extra;
 
@@ -37,8 +36,6 @@ public class LambdaSearchWrapper<T extends VectorModel<? extends VectorModel<?>>
      * 查询最相似的多少条数据
      * Number of the most similar results to return.
      */
-    @Getter
-    @Setter
     @Accessors(chain = true)
     private Integer topK = 10;
 
@@ -46,20 +43,14 @@ public class LambdaSearchWrapper<T extends VectorModel<? extends VectorModel<?>>
     /**
      * 指定要检索的向量列
      */
-    @Getter
-    @Setter
     @Accessors(chain = true)
     private SFunction<T, ?> vectorColumn;
 
     /**
      * 指定输入向量
      */
-    @Getter
-    @Setter
     @Accessors(chain = true)
     private transient List<?> vectorValue;
-
-    private SharedString exprSelect = new SharedString();
 
     public LambdaSearchWrapper() {
         this((T) null);
@@ -75,11 +66,10 @@ public class LambdaSearchWrapper<T extends VectorModel<? extends VectorModel<?>>
         super.initNeed();
     }
 
-    public LambdaSearchWrapper(T entity, Class<T> entityClass, SharedString exprSelect, AtomicInteger paramNameSeq,
+    public LambdaSearchWrapper(T entity, Class<T> entityClass, AtomicInteger paramNameSeq,
                                MergeSegments mergeSegments, IIndexExtra extra, Integer topK, SFunction<T, ?> vectorColumn, List<?> vectorValue) {
         super.setEntity(entity);
         super.setEntityClass(entityClass);
-        this.exprSelect = exprSelect;
         this.paramNameSeq = paramNameSeq;
         this.expression = mergeSegments;
         this.extra = extra;
@@ -95,19 +85,13 @@ public class LambdaSearchWrapper<T extends VectorModel<? extends VectorModel<?>>
     }
 
     @Override
-    public String getExprSelect() {
-        return exprSelect.getStringValue();
-    }
-
-    @Override
     protected LambdaSearchWrapper<T> instance() {
-        return new LambdaSearchWrapper<>(getEntity(), getEntityClass(), null, paramNameSeq,
+        return new LambdaSearchWrapper<>(getEntity(), getEntityClass(), paramNameSeq,
                 new MergeSegments(), extra, topK, vectorColumn, vectorValue);
     }
 
     @Override
     public void clear() {
         super.clear();
-        expression.clear();
     }
 }

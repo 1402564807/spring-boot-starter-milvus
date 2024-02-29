@@ -62,7 +62,6 @@ public class CollectionUtils {
      * @param <V> V
      * @return HashMap
      * @see com.google.common.collect.Maps#newHashMap()
-     * @since 3.4.0
      */
     public static <K, V> Map<K, V> newHashMap() {
         return new HashMap<>();
@@ -76,7 +75,6 @@ public class CollectionUtils {
      * @param <V>          V
      * @return HashMap
      * @see com.google.common.collect.Maps#newHashMapWithExpectedSize
-     * @since 3.4.0
      */
     public static <K, V> Map<K, V> newHashMapWithExpectedSize(int expectedSize) {
         return new HashMap<>(capacity(expectedSize));
@@ -92,7 +90,6 @@ public class CollectionUtils {
      * @param <K>               k
      * @param <V>               v
      * @return V
-     * @since 3.4.0
      */
     public static <K, V> V computeIfAbsent(Map<K, V> concurrentHashMap, K key, Function<? super K, ? extends V> mappingFunction) {
         V v = concurrentHashMap.get(key);
@@ -108,7 +105,6 @@ public class CollectionUtils {
      * default (0.75).
      *
      * @see com.google.common.collect.Maps#capacity(int)
-     * @since 3.4.0
      */
     private static int capacity(int expectedSize) {
         if (expectedSize < 3) {

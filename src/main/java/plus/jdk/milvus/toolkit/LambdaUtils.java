@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.security.AccessController;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 import static java.util.Locale.ENGLISH;
 
@@ -25,7 +25,7 @@ public final class LambdaUtils {
     /**
      * 字段映射
      */
-    private static final Map<String, Map<String, ColumnCache>> COLUMN_CACHE_MAP = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, ColumnCache>> COLUMN_CACHE_MAP = new ConcurrentSkipListMap<>();
 
     /**
      * 该缓存可能会在任意不定的时间被清除

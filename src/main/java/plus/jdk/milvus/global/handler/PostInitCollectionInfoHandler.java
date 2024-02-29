@@ -7,7 +7,6 @@ import plus.jdk.milvus.metadata.ColumnDefinition;
  * 初始化 CollectionInfo 同时进行一些操作
  *
  * @author miemie
- * @since 2022-09-20
  */
 public interface PostInitCollectionInfoHandler {
 

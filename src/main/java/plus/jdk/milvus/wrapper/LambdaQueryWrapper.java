@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import plus.jdk.milvus.conditions.AbstractLambdaWrapper;
-import plus.jdk.milvus.conditions.SharedString;
 import plus.jdk.milvus.conditions.query.Query;
 import plus.jdk.milvus.conditions.segments.MergeSegments;
 import plus.jdk.milvus.record.VectorModel;
@@ -15,23 +14,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Lambda 语法使用 Wrapper
  */
+@Setter
+@Getter
 public class LambdaQueryWrapper<T extends VectorModel<? extends VectorModel<?>>> extends AbstractLambdaWrapper<T, LambdaQueryWrapper<T>>
         implements Query<LambdaQueryWrapper<T>, T, SFunction<T, ?>> {
 
-    @Getter
-    @Setter
     @Accessors(chain = true)
     private Long offset;
 
-    @Getter
-    @Setter
     @Accessors(chain = true)
     private Long limit = 10L;
-
-    /**
-     * 查询字段
-     */
-    private SharedString exprSelect = new SharedString();
 
     public LambdaQueryWrapper() {
         this((T) null);
@@ -47,21 +39,15 @@ public class LambdaQueryWrapper<T extends VectorModel<? extends VectorModel<?>>>
         super.initNeed();
     }
 
-    public LambdaQueryWrapper(T entity, Class<T> entityClass, SharedString exprSelect, AtomicInteger paramNameSeq, MergeSegments mergeSegments,
+    public LambdaQueryWrapper(T entity, Class<T> entityClass, AtomicInteger paramNameSeq, MergeSegments mergeSegments,
                               Long offset, Long limit
     ) {
         super.setEntity(entity);
         super.setEntityClass(entityClass);
         this.paramNameSeq = paramNameSeq;
         this.expression = mergeSegments;
-        this.exprSelect = exprSelect;
         this.offset = offset;
         this.limit = limit;
-    }
-
-    @Override
-    public String getExprSelect() {
-        return exprSelect.getStringValue();
     }
 
     /**
@@ -70,13 +56,12 @@ public class LambdaQueryWrapper<T extends VectorModel<? extends VectorModel<?>>>
      */
     @Override
     protected LambdaQueryWrapper<T> instance() {
-        return new LambdaQueryWrapper<>(getEntity(), getEntityClass(), null, paramNameSeq,
+        return new LambdaQueryWrapper<>(getEntity(), getEntityClass(), paramNameSeq,
                 new MergeSegments(), offset, limit);
     }
 
     @Override
     public void clear() {
         super.clear();
-        exprSelect.toNull();
     }
 }
