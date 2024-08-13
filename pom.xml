@@ -110,13 +110,13 @@
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-core</artifactId>
-            <version>1.47.0</version> <!-- {x-version-update;com.azure:azure-core;dependency} -->
+            <version>1.48.0</version> <!-- {x-version-update;com.azure:azure-core;dependency} -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-core-http-netty</artifactId>
-            <version>1.14.1</version> <!-- {x-version-update;com.azure:azure-core-http-netty;dependency} -->
+            <version>1.14.2</version> <!-- {x-version-update;com.azure:azure-core-http-netty;dependency} -->
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -157,7 +157,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -171,7 +171,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.3</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
